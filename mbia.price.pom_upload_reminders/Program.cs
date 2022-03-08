@@ -10,7 +10,7 @@ namespace mbia.price.pom_upload_reminders
     {
         static void Main(string[] args)
         {
-
+            // Test
         }
     }
 }
