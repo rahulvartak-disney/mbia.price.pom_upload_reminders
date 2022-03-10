@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Price_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Price_v2_Stage.dbo.tblPCRItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblPCRItems">
+          <Key>
+            <PropertyRef Name="PCR_Id" />
+          </Key>
+          <Property Name="PCR_Id" Type="int" Nullable="false" />
+          <Property Name="Item_Nbr" Type="nvarchar" MaxLength="50" />
+          <Property Name="Item_Desc" Type="nvarchar(max)" />
+          <Property Name="New_Retail" Type="money" />
+          <Property Name="Reason_Code" Type="int" />
+          <Property Name="New_Ticket_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Osceola_New_Retail" Type="money" />
+          <Property Name="Orange_New_Retail" Type="money" />
+          <Property Name="DCL_New_Retail" Type="money" />
+          <Property Name="DLR_New_Retail" Type="money" />
+          <Property Name="Aulani_New_Retail" Type="money" />
+          <Property Name="Old_Retail" Type="money" />
+        </EntityType>
+        <EntityType Name="tblPriceRequests">
+          <Key>
+            <PropertyRef Name="PCR_Id" />
+          </Key>
+          <Property Name="PCR_Nbr" Type="nvarchar" MaxLength="20" />
+          <Property Name="PCR_Desc" Type="nvarchar(max)" />
+          <Property Name="PCR_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PCR_Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pricing_Analyst" Type="nvarchar" MaxLength="100" />
+          <Property Name="Requested_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Dept_Nbr_Nm" Type="nvarchar" MaxLength="100" />
+          <Property Name="Planner_Nm" Type="nvarchar" MaxLength="100" />
+          <Property Name="Created_On" Type="date" />
+          <Property Name="Requested_Date" Type="date" />
+          <Property Name="Price_Zone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Change_Type" Type="nvarchar(max)" />
+          <Property Name="Specific_Location" Type="nvarchar(max)" />
+          <Property Name="Effective_Date" Type="date" />
+          <Property Name="Effective_Date_Added_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Effective_Date_Added_On" Type="date" />
+          <Property Name="Last_Modified_On" Type="date" />
+          <Property Name="Pricer_Confirmed_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Pricer_Confirmed_On" Type="date" />
+          <Property Name="Sign_Request_Sent_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sign_Request_Sent_On" Type="date" />
+          <Property Name="Sign_Request_Confirmed_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sign_Request_Confirmed_On" Type="date" />
+          <Property Name="MPI_Confirmed_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="MPI_Confirmed_On" Type="date" />
+          <Property Name="POM_Request_Sent_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="POM_Request_Sent_On" Type="date" />
+          <Property Name="Sourcing_Request_Sent_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sourcing_Request_Sent_On" Type="date" />
+          <Property Name="Supplier_Notification_Sent_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Supplier_Notification_Sent_On" Type="date" />
+          <Property Name="Supplier_Confirmed_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Supplier_Confirmed_On" Type="date" />
+          <Property Name="PO_Comments_Sent_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="PO_Comments_Sent_On" Type="date" />
+          <Property Name="Finalized_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Finalized_On" Type="date" />
+          <Property Name="Modification_Reqd_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Modification_Reqd_On" Type="date" />
+          <Property Name="Planner_Confirmed_By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Planner_Confirmed_On" Type="date" />
+          <Property Name="Sign_Request_Needed" Type="char" MaxLength="1" />
+        </EntityType>
+        <Function Name="Get_Items_By_PCRId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PcrId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Get_POM_Pending_PCRs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Price_ModelStoreContainer">
+          <EntitySet Name="tblPriceRequests" EntityType="Self.tblPriceRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPCRItems" EntityType="Self.tblPCRItems" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblPCRItems].[PCR_Id] AS [PCR_Id], 
+    [tblPCRItems].[Item_Nbr] AS [Item_Nbr], 
+    [tblPCRItems].[Item_Desc] AS [Item_Desc], 
+    [tblPCRItems].[New_Retail] AS [New_Retail], 
+    [tblPCRItems].[Reason_Code] AS [Reason_Code], 
+    [tblPCRItems].[New_Ticket_Type] AS [New_Ticket_Type], 
+    [tblPCRItems].[Osceola_New_Retail] AS [Osceola_New_Retail], 
+    [tblPCRItems].[Orange_New_Retail] AS [Orange_New_Retail], 
+    [tblPCRItems].[DCL_New_Retail] AS [DCL_New_Retail], 
+    [tblPCRItems].[DLR_New_Retail] AS [DLR_New_Retail], 
+    [tblPCRItems].[Aulani_New_Retail] AS [Aulani_New_Retail], 
+    [tblPCRItems].[Old_Retail] AS [Old_Retail]
+    FROM [dbo].[tblPCRItems] AS [tblPCRItems]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Price_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblPriceRequest">
+          <Key>
+            <PropertyRef Name="PCR_Id" />
+          </Key>
+          <Property Name="PCR_Nbr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PCR_Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PCR_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PCR_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pricing_Analyst" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Requested_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Dept_Nbr_Nm" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Planner_Nm" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Created_On" Type="DateTime" Precision="0" />
+          <Property Name="Requested_Date" Type="DateTime" Precision="0" />
+          <Property Name="Price_Zone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Change_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Specific_Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Effective_Date" Type="DateTime" Precision="0" />
+          <Property Name="Effective_Date_Added_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Effective_Date_Added_On" Type="DateTime" Precision="0" />
+          <Property Name="Last_Modified_On" Type="DateTime" Precision="0" />
+          <Property Name="Pricer_Confirmed_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pricer_Confirmed_On" Type="DateTime" Precision="0" />
+          <Property Name="Sign_Request_Sent_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sign_Request_Sent_On" Type="DateTime" Precision="0" />
+          <Property Name="Sign_Request_Confirmed_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sign_Request_Confirmed_On" Type="DateTime" Precision="0" />
+          <Property Name="MPI_Confirmed_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MPI_Confirmed_On" Type="DateTime" Precision="0" />
+          <Property Name="POM_Request_Sent_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="POM_Request_Sent_On" Type="DateTime" Precision="0" />
+          <Property Name="Sourcing_Request_Sent_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sourcing_Request_Sent_On" Type="DateTime" Precision="0" />
+          <Property Name="Supplier_Notification_Sent_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Notification_Sent_On" Type="DateTime" Precision="0" />
+          <Property Name="Supplier_Confirmed_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_Confirmed_On" Type="DateTime" Precision="0" />
+          <Property Name="PO_Comments_Sent_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PO_Comments_Sent_On" Type="DateTime" Precision="0" />
+          <Property Name="Finalized_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Finalized_On" Type="DateTime" Precision="0" />
+          <Property Name="Modification_Reqd_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Modification_Reqd_On" Type="DateTime" Precision="0" />
+          <Property Name="Planner_Confirmed_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Planner_Confirmed_On" Type="DateTime" Precision="0" />
+          <Property Name="Sign_Request_Needed" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblPCRItem">
+          <Key>
+            <PropertyRef Name="PCR_Id" />
+          </Key>
+          <Property Name="PCR_Id" Type="Int32" Nullable="false" />
+          <Property Name="Item_Nbr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Item_Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="New_Retail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Reason_Code" Type="Int32" />
+          <Property Name="New_Ticket_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Osceola_New_Retail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Orange_New_Retail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DCL_New_Retail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DLR_New_Retail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Aulani_New_Retail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Old_Retail" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityContainer Name="Price_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblPriceRequests" EntityType="Self.tblPriceRequest" />
+          <EntitySet Name="tblPCRItems" EntityType="Self.tblPCRItem" />
+          <FunctionImport Name="Get_POM_Pending_PCRs" ReturnType="Collection(Price_Model.Get_POM_Pending_PCRs_Result)" />
+          <FunctionImport Name="Get_Items_By_PCRId" ReturnType="Collection(Price_Model.Get_Items_By_PCRId_Result)">
+            <Parameter Name="PcrId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Get_POM_Pending_PCRs_Result">
+          <Property Type="String" Name="PCR_Nbr" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PCR_Desc" Nullable="true" />
+          <Property Type="Int32" Name="PCR_Id" Nullable="false" />
+          <Property Type="String" Name="PCR_Status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Pricing_Analyst" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Requested_By" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Dept_Nbr_Nm" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Planner_Nm" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Created_On" Nullable="true" />
+          <Property Type="DateTime" Name="Requested_Date" Nullable="true" />
+          <Property Type="String" Name="Price_Zone" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Change_Type" Nullable="true" />
+          <Property Type="String" Name="Specific_Location" Nullable="true" />
+          <Property Type="DateTime" Name="Effective_Date" Nullable="true" />
+          <Property Type="String" Name="Effective_Date_Added_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Effective_Date_Added_On" Nullable="true" />
+          <Property Type="DateTime" Name="Last_Modified_On" Nullable="true" />
+          <Property Type="String" Name="Pricer_Confirmed_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Pricer_Confirmed_On" Nullable="true" />
+          <Property Type="String" Name="Sign_Request_Sent_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Sign_Request_Sent_On" Nullable="true" />
+          <Property Type="String" Name="Sign_Request_Confirmed_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Sign_Request_Confirmed_On" Nullable="true" />
+          <Property Type="String" Name="MPI_Confirmed_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="MPI_Confirmed_On" Nullable="true" />
+          <Property Type="String" Name="POM_Request_Sent_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="POM_Request_Sent_On" Nullable="true" />
+          <Property Type="String" Name="Sourcing_Request_Sent_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Sourcing_Request_Sent_On" Nullable="true" />
+          <Property Type="String" Name="Supplier_Notification_Sent_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Supplier_Notification_Sent_On" Nullable="true" />
+          <Property Type="String" Name="Supplier_Confirmed_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Supplier_Confirmed_On" Nullable="true" />
+          <Property Type="String" Name="PO_Comments_Sent_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="PO_Comments_Sent_On" Nullable="true" />
+          <Property Type="String" Name="Finalized_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Finalized_On" Nullable="true" />
+          <Property Type="String" Name="Modification_Reqd_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Modification_Reqd_On" Nullable="true" />
+          <Property Type="String" Name="Planner_Confirmed_By" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Planner_Confirmed_On" Nullable="true" />
+          <Property Type="String" Name="Sign_Request_Needed" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="Get_Items_By_PCRId_Result">
+          <Property Type="Int32" Name="PCR_Id" Nullable="false" />
+          <Property Type="String" Name="Item_Nbr" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Item_Desc" Nullable="true" />
+          <Property Type="Decimal" Name="New_Retail" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="Reason_Code" Nullable="true" />
+          <Property Type="String" Name="New_Ticket_Type" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Osceola_New_Retail" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Orange_New_Retail" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="DCL_New_Retail" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="DLR_New_Retail" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Aulani_New_Retail" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Old_Retail" Nullable="true" Precision="19" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Price_ModelStoreContainer" CdmEntityContainer="Price_Entities">
+          <EntitySetMapping Name="tblPriceRequests">
+            <EntityTypeMapping TypeName="Price_Model.tblPriceRequest">
+              <MappingFragment StoreEntitySet="tblPriceRequests">
+                <ScalarProperty Name="PCR_Nbr" ColumnName="PCR_Nbr" />
+                <ScalarProperty Name="PCR_Desc" ColumnName="PCR_Desc" />
+                <ScalarProperty Name="PCR_Id" ColumnName="PCR_Id" />
+                <ScalarProperty Name="PCR_Status" ColumnName="PCR_Status" />
+                <ScalarProperty Name="Pricing_Analyst" ColumnName="Pricing_Analyst" />
+                <ScalarProperty Name="Requested_By" ColumnName="Requested_By" />
+                <ScalarProperty Name="Dept_Nbr_Nm" ColumnName="Dept_Nbr_Nm" />
+                <ScalarProperty Name="Planner_Nm" ColumnName="Planner_Nm" />
+                <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+                <ScalarProperty Name="Requested_Date" ColumnName="Requested_Date" />
+                <ScalarProperty Name="Price_Zone" ColumnName="Price_Zone" />
+                <ScalarProperty Name="Change_Type" ColumnName="Change_Type" />
+                <ScalarProperty Name="Specific_Location" ColumnName="Specific_Location" />
+                <ScalarProperty Name="Effective_Date" ColumnName="Effective_Date" />
+                <ScalarProperty Name="Effective_Date_Added_By" ColumnName="Effective_Date_Added_By" />
+                <ScalarProperty Name="Effective_Date_Added_On" ColumnName="Effective_Date_Added_On" />
+                <ScalarProperty Name="Last_Modified_On" ColumnName="Last_Modified_On" />
+                <ScalarProperty Name="Pricer_Confirmed_By" ColumnName="Pricer_Confirmed_By" />
+                <ScalarProperty Name="Pricer_Confirmed_On" ColumnName="Pricer_Confirmed_On" />
+                <ScalarProperty Name="Sign_Request_Sent_By" ColumnName="Sign_Request_Sent_By" />
+                <ScalarProperty Name="Sign_Request_Sent_On" ColumnName="Sign_Request_Sent_On" />
+                <ScalarProperty Name="Sign_Request_Confirmed_By" ColumnName="Sign_Request_Confirmed_By" />
+                <ScalarProperty Name="Sign_Request_Confirmed_On" ColumnName="Sign_Request_Confirmed_On" />
+                <ScalarProperty Name="MPI_Confirmed_By" ColumnName="MPI_Confirmed_By" />
+                <ScalarProperty Name="MPI_Confirmed_On" ColumnName="MPI_Confirmed_On" />
+                <ScalarProperty Name="POM_Request_Sent_By" ColumnName="POM_Request_Sent_By" />
+                <ScalarProperty Name="POM_Request_Sent_On" ColumnName="POM_Request_Sent_On" />
+                <ScalarProperty Name="Sourcing_Request_Sent_By" ColumnName="Sourcing_Request_Sent_By" />
+                <ScalarProperty Name="Sourcing_Request_Sent_On" ColumnName="Sourcing_Request_Sent_On" />
+                <ScalarProperty Name="Supplier_Notification_Sent_By" ColumnName="Supplier_Notification_Sent_By" />
+                <ScalarProperty Name="Supplier_Notification_Sent_On" ColumnName="Supplier_Notification_Sent_On" />
+                <ScalarProperty Name="Supplier_Confirmed_By" ColumnName="Supplier_Confirmed_By" />
+                <ScalarProperty Name="Supplier_Confirmed_On" ColumnName="Supplier_Confirmed_On" />
+                <ScalarProperty Name="PO_Comments_Sent_By" ColumnName="PO_Comments_Sent_By" />
+                <ScalarProperty Name="PO_Comments_Sent_On" ColumnName="PO_Comments_Sent_On" />
+                <ScalarProperty Name="Finalized_By" ColumnName="Finalized_By" />
+                <ScalarProperty Name="Finalized_On" ColumnName="Finalized_On" />
+                <ScalarProperty Name="Modification_Reqd_By" ColumnName="Modification_Reqd_By" />
+                <ScalarProperty Name="Modification_Reqd_On" ColumnName="Modification_Reqd_On" />
+                <ScalarProperty Name="Planner_Confirmed_By" ColumnName="Planner_Confirmed_By" />
+                <ScalarProperty Name="Planner_Confirmed_On" ColumnName="Planner_Confirmed_On" />
+                <ScalarProperty Name="Sign_Request_Needed" ColumnName="Sign_Request_Needed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPCRItems">
+            <EntityTypeMapping TypeName="Price_Model.tblPCRItem">
+              <MappingFragment StoreEntitySet="tblPCRItems">
+                <ScalarProperty Name="PCR_Id" ColumnName="PCR_Id" />
+                <ScalarProperty Name="Item_Nbr" ColumnName="Item_Nbr" />
+                <ScalarProperty Name="Item_Desc" ColumnName="Item_Desc" />
+                <ScalarProperty Name="New_Retail" ColumnName="New_Retail" />
+                <ScalarProperty Name="Reason_Code" ColumnName="Reason_Code" />
+                <ScalarProperty Name="New_Ticket_Type" ColumnName="New_Ticket_Type" />
+                <ScalarProperty Name="Osceola_New_Retail" ColumnName="Osceola_New_Retail" />
+                <ScalarProperty Name="Orange_New_Retail" ColumnName="Orange_New_Retail" />
+                <ScalarProperty Name="DCL_New_Retail" ColumnName="DCL_New_Retail" />
+                <ScalarProperty Name="DLR_New_Retail" ColumnName="DLR_New_Retail" />
+                <ScalarProperty Name="Aulani_New_Retail" ColumnName="Aulani_New_Retail" />
+                <ScalarProperty Name="Old_Retail" ColumnName="Old_Retail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Get_POM_Pending_PCRs" FunctionName="Price_Model.Store.Get_POM_Pending_PCRs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Price_Model.Get_POM_Pending_PCRs_Result">
+                <ScalarProperty Name="PCR_Nbr" ColumnName="PCR_Nbr" />
+                <ScalarProperty Name="PCR_Desc" ColumnName="PCR_Desc" />
+                <ScalarProperty Name="PCR_Id" ColumnName="PCR_Id" />
+                <ScalarProperty Name="PCR_Status" ColumnName="PCR_Status" />
+                <ScalarProperty Name="Pricing_Analyst" ColumnName="Pricing_Analyst" />
+                <ScalarProperty Name="Requested_By" ColumnName="Requested_By" />
+                <ScalarProperty Name="Dept_Nbr_Nm" ColumnName="Dept_Nbr_Nm" />
+                <ScalarProperty Name="Planner_Nm" ColumnName="Planner_Nm" />
+                <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+                <ScalarProperty Name="Requested_Date" ColumnName="Requested_Date" />
+                <ScalarProperty Name="Price_Zone" ColumnName="Price_Zone" />
+                <ScalarProperty Name="Change_Type" ColumnName="Change_Type" />
+                <ScalarProperty Name="Specific_Location" ColumnName="Specific_Location" />
+                <ScalarProperty Name="Effective_Date" ColumnName="Effective_Date" />
+                <ScalarProperty Name="Effective_Date_Added_By" ColumnName="Effective_Date_Added_By" />
+                <ScalarProperty Name="Effective_Date_Added_On" ColumnName="Effective_Date_Added_On" />
+                <ScalarProperty Name="Last_Modified_On" ColumnName="Last_Modified_On" />
+                <ScalarProperty Name="Pricer_Confirmed_By" ColumnName="Pricer_Confirmed_By" />
+                <ScalarProperty Name="Pricer_Confirmed_On" ColumnName="Pricer_Confirmed_On" />
+                <ScalarProperty Name="Sign_Request_Sent_By" ColumnName="Sign_Request_Sent_By" />
+                <ScalarProperty Name="Sign_Request_Sent_On" ColumnName="Sign_Request_Sent_On" />
+                <ScalarProperty Name="Sign_Request_Confirmed_By" ColumnName="Sign_Request_Confirmed_By" />
+                <ScalarProperty Name="Sign_Request_Confirmed_On" ColumnName="Sign_Request_Confirmed_On" />
+                <ScalarProperty Name="MPI_Confirmed_By" ColumnName="MPI_Confirmed_By" />
+                <ScalarProperty Name="MPI_Confirmed_On" ColumnName="MPI_Confirmed_On" />
+                <ScalarProperty Name="POM_Request_Sent_By" ColumnName="POM_Request_Sent_By" />
+                <ScalarProperty Name="POM_Request_Sent_On" ColumnName="POM_Request_Sent_On" />
+                <ScalarProperty Name="Sourcing_Request_Sent_By" ColumnName="Sourcing_Request_Sent_By" />
+                <ScalarProperty Name="Sourcing_Request_Sent_On" ColumnName="Sourcing_Request_Sent_On" />
+                <ScalarProperty Name="Supplier_Notification_Sent_By" ColumnName="Supplier_Notification_Sent_By" />
+                <ScalarProperty Name="Supplier_Notification_Sent_On" ColumnName="Supplier_Notification_Sent_On" />
+                <ScalarProperty Name="Supplier_Confirmed_By" ColumnName="Supplier_Confirmed_By" />
+                <ScalarProperty Name="Supplier_Confirmed_On" ColumnName="Supplier_Confirmed_On" />
+                <ScalarProperty Name="PO_Comments_Sent_By" ColumnName="PO_Comments_Sent_By" />
+                <ScalarProperty Name="PO_Comments_Sent_On" ColumnName="PO_Comments_Sent_On" />
+                <ScalarProperty Name="Finalized_By" ColumnName="Finalized_By" />
+                <ScalarProperty Name="Finalized_On" ColumnName="Finalized_On" />
+                <ScalarProperty Name="Modification_Reqd_By" ColumnName="Modification_Reqd_By" />
+                <ScalarProperty Name="Modification_Reqd_On" ColumnName="Modification_Reqd_On" />
+                <ScalarProperty Name="Planner_Confirmed_By" ColumnName="Planner_Confirmed_By" />
+                <ScalarProperty Name="Planner_Confirmed_On" ColumnName="Planner_Confirmed_On" />
+                <ScalarProperty Name="Sign_Request_Needed" ColumnName="Sign_Request_Needed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Items_By_PCRId" FunctionName="Price_Model.Store.Get_Items_By_PCRId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Price_Model.Get_Items_By_PCRId_Result">
+                <ScalarProperty Name="PCR_Id" ColumnName="PCR_Id" />
+                <ScalarProperty Name="Item_Nbr" ColumnName="Item_Nbr" />
+                <ScalarProperty Name="Item_Desc" ColumnName="Item_Desc" />
+                <ScalarProperty Name="New_Retail" ColumnName="New_Retail" />
+                <ScalarProperty Name="Reason_Code" ColumnName="Reason_Code" />
+                <ScalarProperty Name="New_Ticket_Type" ColumnName="New_Ticket_Type" />
+                <ScalarProperty Name="Osceola_New_Retail" ColumnName="Osceola_New_Retail" />
+                <ScalarProperty Name="Orange_New_Retail" ColumnName="Orange_New_Retail" />
+                <ScalarProperty Name="DCL_New_Retail" ColumnName="DCL_New_Retail" />
+                <ScalarProperty Name="DLR_New_Retail" ColumnName="DLR_New_Retail" />
+                <ScalarProperty Name="Aulani_New_Retail" ColumnName="Aulani_New_Retail" />
+                <ScalarProperty Name="Old_Retail" ColumnName="Old_Retail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
