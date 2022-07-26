@@ -272,7 +272,7 @@ namespace mbia.price.pom_upload_reminders
 
                             string recipients, subject, body;
                             recipients = Get_Receipients_By_Dept_By_Role("NA", Constants.UserRoles.ROLE_POM, oWeb);
-                            //recipients = "rahul.vartak@disney.com";
+                            //recipients = "rahul.vartak@disney.com"; 
                             SPListItem emailTemplate = DataLayer.Get_From_Email_Template(oWeb, Constants.EmailTemplate.KEY_POM_UPLOAD_REMINDER);
 
                             if (null != emailTemplate)
