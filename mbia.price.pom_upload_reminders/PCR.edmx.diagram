@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="22087fbd490c465aa7ad2a8e1ac4deb3" Name="Diagram1">
+      <Diagram DiagramId="22087fbd490c465aa7ad2a8e1ac4deb3" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="Price_Model.tblPriceRequest" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Price_Model.tblPCRItem" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Price_Model.tblPCRItem" Width="1.5" PointX="4" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
